@@ -11,6 +11,9 @@ import java.util.List;
  */
 @Repository
 public interface ForeignExchangeDetailsRepository extends JpaRepository<ForeignExchangeDetailsEntity, Long> {
+
     ForeignExchangeDetailsEntity findTopByCurrencyOrderByActualDateDesc(String currency);
+
     List<ForeignExchangeDetailsEntity> findByCurrencyOrderByActualDateDesc(String currency);
+
 }

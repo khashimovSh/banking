@@ -23,7 +23,7 @@ public class CsvStringToPojoUtils {
         for (String line : eachLine) {
             String[] values = line.split(",");
             if (values.length != 5) {
-                throw new IllegalStateException("Incorrect data inserted");
+                throw new IllegalStateException("Data with extra field inserted");
             }
             try {
                 foreignExchangeDetails.add(ForeignExchangeDetails.builder()

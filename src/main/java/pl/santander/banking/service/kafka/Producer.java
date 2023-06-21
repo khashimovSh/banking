@@ -18,6 +18,6 @@ public class Producer {
 
     public void sendMessage(String message) {
         log.info(String.format("# -> Currency update published -> %s", message));
-        this.kafkaTemplate.send(TOPIC, message);
+        kafkaTemplate.send(TOPIC, message);
     }
 }

@@ -21,7 +21,7 @@ public class Consumer {
     private final CalculationService calculationService;
 
     @KafkaListener(topics = "update-currency-info", groupId = "santander")
-    public void consume(String message) throws IOException {
+    public void consume(String message) {
         log.info(String.format("# -> Received currency update -> %s", message));
         List<ForeignExchangeDetails> foreignExchangeDetails = CsvStringToPojoUtils.parseCsvString(message);
         calculationService.calculateCommissionAndSave(foreignExchangeDetails);

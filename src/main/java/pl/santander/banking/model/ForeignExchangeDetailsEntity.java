@@ -28,6 +28,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "FX_DETAILS")
 public class ForeignExchangeDetailsEntity {
+
     @Id
     private Long id;
     @Column(name = "currency")

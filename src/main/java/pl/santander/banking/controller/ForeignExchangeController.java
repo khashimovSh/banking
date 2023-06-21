@@ -22,12 +22,11 @@ import java.util.List;
 public class ForeignExchangeController {
 
     private final ActualInformationService actualInformationService;
-
     private final Producer producer;
 
     @PostMapping(value = "/publishUpdate")
     public List<ForeignExchangeDetails> publishNewFXDetails(UpdatePublishRequest updatePublishRequest) throws InterruptedException {
-        this.producer.sendMessage(updatePublishRequest.getActualCurrencyInfo());
+        producer.sendMessage(updatePublishRequest.getActualCurrencyInfo());
         Thread.sleep(500);
         return actualInformationService.getLatestPublishedCurrencyInfo();
     }

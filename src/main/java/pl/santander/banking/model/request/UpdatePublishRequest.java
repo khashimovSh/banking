@@ -7,5 +7,7 @@ import lombok.Data;
  */
 @Data
 public class UpdatePublishRequest {
+
     private String actualCurrencyInfo;
+
 }

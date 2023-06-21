@@ -12,9 +12,11 @@ import java.sql.Timestamp;
 @Data
 @Builder
 public class ForeignExchangeDetails {
+
     private Long id;
     private String currency;
     private BigDecimal bid;
     private BigDecimal ask;
     private Timestamp actualDate;
+
 }
