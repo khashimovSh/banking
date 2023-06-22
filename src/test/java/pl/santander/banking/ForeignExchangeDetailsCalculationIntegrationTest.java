@@ -6,9 +6,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.MediaType;
 import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.test.annotation.DirtiesContext;
 import pl.santander.banking.model.ForeignExchangeDetails;
+import pl.santander.banking.model.request.UpdatePublishRequest;
 import pl.santander.banking.service.kafka.Consumer;
 import pl.santander.banking.service.kafka.Producer;
 
@@ -42,15 +44,17 @@ class ForeignExchangeDetailsCalculationIntegrationTest {
                 "108,GBP/USD,1.2500,1.2560,01-06-2020 12:01:02:002\n" +
                 "109,GBP/USD, 1.2499, 1.2561, 01-06-2020 12:01:02:100\n" +
                 "110, EUR/JPY, 119.61, 119.91, 01-06-2020 12:01:02:110";
-
         //when
         val result = given()
                 .port(serverPort)
-                .param("actualCurrencyInfo", currencyInfo)
+                .header("Content-Type", "application/json")
+                .body(UpdatePublishRequest.builder()
+                        .actualCurrencyInfo(currencyInfo).build())
                 .when()
                 .post("/currency/publishUpdate")
                 .then()
                 .statusCode(200)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .extract().response().as(new TypeRef<List<ForeignExchangeDetails>>() {
                 });
 

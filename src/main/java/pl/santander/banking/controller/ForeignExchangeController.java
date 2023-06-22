@@ -3,6 +3,7 @@ package pl.santander.banking.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +26,8 @@ public class ForeignExchangeController {
     private final Producer producer;
 
     @PostMapping(value = "/publishUpdate")
-    public List<ForeignExchangeDetails> publishNewFXDetails(UpdatePublishRequest updatePublishRequest) throws InterruptedException {
+    public List<ForeignExchangeDetails> publishNewFXDetails(@RequestBody UpdatePublishRequest updatePublishRequest)
+            throws InterruptedException {
         producer.sendMessage(updatePublishRequest.getActualCurrencyInfo());
         Thread.sleep(500);
         return actualInformationService.getLatestPublishedCurrencyInfo();
