@@ -35,7 +35,7 @@ class ForeignExchangeDetailsCalculationIntegrationTest {
     private Consumer consumer;
 
     @Test
-    void givenEmbeddedKafkaBroker_whenSendingWithSimpleProducer_thenMessageReceived() {
+    void publishingNewEvent_shouldReceive_process_saveInternally_returnAllInfo() {
         //given
         val currencyInfo = "106, EUR/USD, 1.1000, 1.2000, 01-06-2020 12:01:01:001\n" +
                 "107, EUR/JPY, 119.60, 119.90, 01-06-2020 12:01:02:002\n" +
